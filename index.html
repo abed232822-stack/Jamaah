@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>جماعة | مواقيت الصلاة وتنبيه الخروج إلى المسجد</title>
+<meta name="description" content="جماعة يعدّ لك الوقت حتى الإقامة ويخبرك متى تخرج من بيتك لتدرك الجماعة من أولها. مجاني لوجه الله، بلا أي إعلانات وبلا تسجيل حساب.">
+<meta name="theme-color" content="#071717" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F7EFE3" media="(prefers-color-scheme: light)">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="جماعة | Jama'ah">
+<meta property="og:description" content="يعدّ لك الوقت حتى الإقامة ويخبرك متى تخرج إلى المسجد. مجاني لوجه الله وبلا إعلانات.">
+<meta property="og:image" content="https://abed232822-stack.github.io/Jamaah/docs/screenshots/ar-04-home-iqamah-countdown.png">
+<meta property="og:url" content="https://abed232822-stack.github.io/Jamaah/">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="Jamaah%20Handoff/logo/app-icon-dark-1024.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@600;700&family=Readex+Pro:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #F7EFE3;
+    --ink: #053631;
+    --tile: #ECDFD0;
+    --acc: #C66846;
+    --acc-ink: #FDF8F1;
+    --ring: #E7885D;
+    --mut: rgba(5, 54, 49, .66);
+    --line: rgba(5, 54, 49, .12);
+    --shadow: rgba(5, 54, 49, .22);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #071717;
+      --ink: #F0E6DA;
+      --tile: #0F2525;
+      --acc: #D3754F;
+      --acc-ink: #FDF8F1;
+      --ring: #EE8F63;
+      --mut: rgba(240, 230, 218, .62);
+      --line: rgba(240, 230, 218, .10);
+      --shadow: rgba(0, 0, 0, .55);
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    min-height: 100svh;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Readex Pro", system-ui, sans-serif;
+    font-size: 1rem;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  :focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; border-radius: 12px; }
+
+  .page {
+    min-height: 100svh;
+    max-width: 1120px;
+    margin-inline: auto;
+    padding: 20px 16px 40px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* top bar */
+  .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+  .brand img { width: 48px; height: 48px; border-radius: 14px; display: block; }
+  .brand-name { font-family: "Reem Kufi", "Readex Pro", sans-serif; font-weight: 700; font-size: 1.6rem; line-height: 1; }
+
+  .tools { display: flex; align-items: center; gap: 10px; }
+  .gh {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 99px;
+    background: var(--tile);
+    color: var(--ink);
+  }
+  .gh svg { width: 22px; height: 22px; display: block; }
+
+  .lang {
+    font: inherit;
+    font-size: .95rem;
+    color: var(--ink);
+    background: var(--tile);
+    border: 0;
+    border-radius: 99px;
+    min-height: 48px;
+    padding: 0 20px;
+    cursor: pointer;
+  }
+
+  /* hero */
+  .hero {
+    flex: 1;
+    display: grid;
+    gap: 40px;
+    align-items: center;
+    padding-block: 32px 8px;
+  }
+
+  .copy { max-width: 34rem; }
+
+  h1 {
+    font-family: "Reem Kufi", "Readex Pro", sans-serif;
+    font-weight: 700;
+    font-size: clamp(2.1rem, 7vw, 3.5rem);
+    line-height: 1.3;
+    letter-spacing: 0;
+  }
+
+  .lead { margin-block-start: 16px; font-size: 1.08rem; color: var(--mut); max-width: 30rem; }
+
+  .facts { list-style: none; padding: 0; margin-block-start: 24px; display: flex; flex-wrap: wrap; gap: 10px; }
+  .facts li {
+    background: var(--tile);
+    border-radius: 99px;
+    padding: 6px 16px;
+    font-size: .95rem;
+  }
+
+  .cta { margin-block-start: 32px; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-height: 56px;
+    padding: 0 32px;
+    border-radius: 99px;
+    background: var(--acc);
+    color: var(--acc-ink);
+    font-family: "Readex Pro", sans-serif;
+    font-weight: 500;
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: transform .15s ease, filter .15s ease;
+  }
+  .btn:hover { filter: brightness(1.07); }
+  .btn:active { transform: scale(.98); }
+  .btn svg { width: 22px; height: 22px; flex: none; }
+
+  .meta { margin-block-start: 12px; font-size: .9rem; color: var(--mut); }
+  .hint { margin-block-start: 4px; font-size: .85rem; color: var(--mut); }
+
+  /* screenshots */
+  .shots {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-block: 8px 24px;
+  }
+
+  .rings {
+    position: absolute;
+    inset-inline: 0;
+    top: 50%;
+    margin-inline: auto;
+    width: min(100%, 600px);
+    translate: 0 -50%;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .rings circle { fill: none; stroke-width: 5; stroke-linecap: round; }
+  .rings .track { stroke: var(--line); }
+  .rings .arc { stroke: var(--ring); opacity: .55; transform-origin: 200px 200px; rotate: -90deg; }
+  .rings .outer { stroke-dasharray: 1194; stroke-dashoffset: 330; }
+  .rings .inner { stroke-dasharray: 942; stroke-dashoffset: 560; opacity: .4; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .rings .outer { animation: draw-outer 1.8s cubic-bezier(.2, .7, .2, 1) both; }
+    .rings .inner { animation: draw-inner 1.8s .15s cubic-bezier(.2, .7, .2, 1) both; }
+  }
+  @keyframes draw-outer { from { stroke-dashoffset: 1194; } to { stroke-dashoffset: 330; } }
+  @keyframes draw-inner { from { stroke-dashoffset: 942; } to { stroke-dashoffset: 560; } }
+
+  .phone {
+    position: relative;
+    z-index: 1;
+    width: min(37vw, 220px);
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 22px 28px var(--shadow));
+  }
+  .phone + .phone { margin-inline-start: -18px; margin-block-start: 48px; }
+
+  /* wide screens: copy beside the phones */
+  @media (min-width: 860px) {
+    .page { padding: 28px 32px 40px; }
+    .hero { grid-template-columns: 1.05fr 1fr; gap: 56px; padding-block: 24px; }
+    .brand img { width: 56px; height: 56px; border-radius: 16px; }
+    .brand-name { font-size: 1.9rem; }
+    .phone { width: min(18vw, 232px); }
+  }
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="top">
+    <a class="brand" href="./" aria-label="Jama'ah">
+      <img src="Jamaah%20Handoff/logo/app-icon-dark-1024.png" alt="" width="56" height="56">
+      <span class="brand-name">جماعة</span>
+    </a>
+    <div class="tools">
+      <a class="gh" href="https://github.com/abed232822-stack/Jamaah" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      </a>
+      <button class="lang" id="lang" type="button" lang="en" dir="ltr">English</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="copy">
+      <h1 data-i18n="h1">اخرج إلى المسجد في الوقت المناسب</h1>
+      <p class="lead" data-i18n="lead">جماعة يعدّ لك الوقت حتى الإقامة، ويخبرك متى تخرج من بيتك لتدرك الجماعة من أولها.</p>
+
+      <ul class="facts">
+        <li data-i18n="f1">مجاني لوجه الله</li>
+        <li data-i18n="f2">بلا تسجيل حساب</li>
+        <li data-i18n="f4">بلا أي نوع من الإعلانات</li>
+        <li data-i18n="f3">المواقيت محفوظة على جهازك</li>
+      </ul>
+
+      <div class="cta">
+        <a class="btn" href="https://github.com/abed232822-stack/Jamaah/releases/download/v1.0.0/Jamaah-1.0.0-arm64-v8a.apk" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 20h14"/></svg>
+          <span data-i18n="btn">حمّل التطبيق</span>
+        </a>
+        <p class="meta" data-i18n="meta">لأجهزة أندرويد فقط، الإصدار 1.0.0، حجمه 24 ميغابايت</p>
+        <p class="hint" data-i18n="hint">بعد التحميل افتح الملف واسمح بالتثبيت من هذا المصدر.</p>
+      </div>
+    </div>
+
+    <div class="shots">
+      <svg class="rings" viewBox="0 0 400 400" aria-hidden="true">
+        <circle class="track" cx="200" cy="200" r="190"/>
+        <circle class="track" cx="200" cy="200" r="150"/>
+        <circle class="arc outer" cx="200" cy="200" r="190"/>
+        <circle class="arc inner" cx="200" cy="200" r="150"/>
+      </svg>
+      <img class="phone" id="shot1" src="docs/screenshots/ar-04-home-iqamah-countdown.png" alt="العدّ التنازلي للإقامة في شاشة جماعة" width="481" height="967">
+      <img class="phone" id="shot2" src="docs/screenshots/ar-08-settings.png" alt="شاشة الإعدادات في جماعة" width="481" height="967">
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  var T = {
+    ar: {
+      title: "جماعة | مواقيت الصلاة وتنبيه الخروج إلى المسجد",
+      h1: "اخرج إلى المسجد في الوقت المناسب",
+      lead: "جماعة يعدّ لك الوقت حتى الإقامة، ويخبرك متى تخرج من بيتك لتدرك الجماعة من أولها.",
+      f1: "مجاني لوجه الله",
+      f2: "بلا تسجيل حساب",
+      f3: "المواقيت محفوظة على جهازك",
+      f4: "بلا أي نوع من الإعلانات",
+      btn: "حمّل التطبيق",
+      meta: "لأجهزة أندرويد فقط، الإصدار 1.0.0، حجمه 24 ميغابايت",
+      hint: "بعد التحميل افتح الملف واسمح بالتثبيت من هذا المصدر.",
+      toggle: "English",
+      s1: ["docs/screenshots/ar-04-home-iqamah-countdown.png", "العدّ التنازلي للإقامة في شاشة جماعة"],
+      s2: ["docs/screenshots/ar-08-settings.png", "شاشة الإعدادات في جماعة"]
+    },
+    en: {
+      title: "Jama'ah | Prayer times and leave-for-the-mosque alerts",
+      h1: "Leave for the mosque on time",
+      lead: "Jama'ah counts down to the iqamah and tells you when to leave home, so you catch the prayer from the start.",
+      f1: "Free, for the sake of God",
+      f2: "No account needed",
+      f3: "Prayer times saved on your device",
+      f4: "No ads of any kind",
+      btn: "Download the app",
+      meta: "Android only, version 1.0.0, 24 MB",
+      hint: "After downloading, open the file and allow installing from this source.",
+      toggle: "العربية",
+      s1: ["docs/screenshots/en-03-home-before-adhan.png", "Countdown to the next prayer in Jama'ah"],
+      s2: ["docs/screenshots/en-08-settings.png", "Settings screen in Jama'ah"]
+    }
+  };
+
+  function apply(l) {
+    var t = T[l];
+    var root = document.documentElement;
+    root.lang = l;
+    root.dir = l === "ar" ? "rtl" : "ltr";
+    document.title = t.title;
+    document.querySelectorAll("[data-i18n]").forEach(function (el) {
+      el.textContent = t[el.getAttribute("data-i18n")];
+    });
+    var b = document.getElementById("lang");
+    b.textContent = t.toggle;
+    b.lang = l === "ar" ? "en" : "ar";
+    b.dir = l === "ar" ? "ltr" : "rtl";
+    [["shot1", t.s1], ["shot2", t.s2]].forEach(function (p) {
+      var img = document.getElementById(p[0]);
+      img.src = p[1][0];
+      img.alt = p[1][1];
+    });
+    try { localStorage.setItem("jamaah-lang", l); } catch (e) {}
+  }
+
+  var saved = null;
+  try { saved = localStorage.getItem("jamaah-lang"); } catch (e) {}
+  var q = new URLSearchParams(location.search).get("lang");
+  var start = (q === "en" || q === "ar") ? q : (saved === "en" ? "en" : "ar");
+  if (start === "en") apply("en");
+
+  document.getElementById("lang").addEventListener("click", function () {
+    apply(document.documentElement.lang === "ar" ? "en" : "ar");
+  });
+})();
+</script>
+</body>
+</html>
