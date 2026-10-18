@@ -8,6 +8,10 @@
 
 🌐 [English](README.md) | **العربية**
 
+[![Download](https://img.shields.io/badge/⬇️%20Download-Jama'ah-D3754F?style=for-the-badge)](https://abed232822-stack.github.io/Jamaah/)
+
+📲 **موقع التحميل:** https://abed232822-stack.github.io/Jamaah/
+
 </div>
 
 ---

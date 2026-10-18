@@ -14,6 +14,10 @@
 
 🌐 **English** | [العربية](README.ar.md)
 
+[![Download](https://img.shields.io/badge/⬇️%20Download-Jama'ah-D3754F?style=for-the-badge)](https://abed232822-stack.github.io/Jamaah/)
+
+📲 **Download page:** https://abed232822-stack.github.io/Jamaah/
+
 </div>
 
 ---
