@@ -204,6 +204,114 @@
     .brand-name { font-size: 1.9rem; }
     .phone { width: min(18vw, 232px); }
   }
+
+  .explain {
+    font: inherit;
+    font-size: .95rem;
+    color: var(--acc-ink);
+    background: var(--acc);
+    border: 0;
+    border-radius: 99px;
+    min-height: 48px;
+    padding: 0 20px;
+    cursor: pointer;
+    transition: filter .15s ease, transform .15s ease;
+  }
+  .explain:hover { filter: brightness(1.07); }
+  .explain:active { transform: scale(.98); }
+
+  /* explain dialog */
+  .guide {
+    border: 0;
+    padding: 0;
+    width: min(94vw, 760px);
+    max-height: min(90svh, 900px);
+    margin: auto;
+    background: var(--bg);
+    color: var(--ink);
+    border-radius: 28px;
+    box-shadow: 0 30px 80px var(--shadow);
+    overflow: hidden;
+  }
+  .guide[open] { display: flex; flex-direction: column; }
+  .guide::backdrop { background: rgba(0, 0, 0, .6); }
+  @media (prefers-reduced-motion: no-preference) {
+    .guide[open] { animation: guide-in .22s cubic-bezier(.2, .7, .2, 1); }
+    @keyframes guide-in { from { opacity: 0; transform: translateY(16px) scale(.98); } }
+  }
+
+  .guide-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 20px;
+    border-block-end: 1px solid var(--line);
+  }
+  .guide-head h2 { font-family: "Reem Kufi", "Readex Pro", sans-serif; font-weight: 700; font-size: 1.5rem; line-height: 1.3; }
+  .guide-close {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border: 0;
+    border-radius: 99px;
+    background: var(--tile);
+    color: var(--ink);
+    cursor: pointer;
+  }
+  .guide-close svg { width: 20px; height: 20px; }
+
+  .guide-body { overflow-y: auto; overscroll-behavior: contain; padding: 8px 20px 28px; }
+  .guide-body { scrollbar-width: none; }
+  .guide-body::-webkit-scrollbar { display: none; }
+  .guide-intro { color: var(--mut); margin-block: 12px 4px; }
+
+  .step { display: grid; gap: 20px; align-items: center; padding-block: 28px; border-block-end: 1px solid var(--line); }
+  .step:last-child { border-block-end: 0; padding-block-end: 0; }
+  .step h3 { font-family: "Reem Kufi", "Readex Pro", sans-serif; font-weight: 700; font-size: 1.3rem; line-height: 1.4; display: flex; align-items: center; gap: 10px; }
+  .step-no {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 99px;
+    background: var(--acc);
+    color: var(--acc-ink);
+    font-family: "Readex Pro", sans-serif;
+    font-size: 1rem;
+  }
+  .step-lead { margin-block-start: 6px; color: var(--mut); }
+  .marks { list-style: none; padding: 0; margin-block-start: 14px; display: grid; gap: 12px; counter-reset: mark; }
+  .marks li { display: flex; gap: 12px; align-items: flex-start; counter-increment: mark; }
+  .marks li::before {
+    content: counter(mark);
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    margin-block-start: 1px;
+    border-radius: 99px;
+    background: #F0E6DA;
+    color: #053631;
+    border: 2px solid #053631;
+    font-size: .85rem;
+    font-weight: 500;
+    line-height: 1;
+  }
+  .step figure { display: flex; justify-content: center; gap: 12px; }
+  .step img { width: min(46vw, 210px); height: auto; display: block; filter: drop-shadow(0 14px 18px var(--shadow)); }
+  .step figure.two img { width: min(40vw, 190px); }
+
+  @media (min-width: 640px) {
+    .guide-body { padding-inline: 32px; }
+    .step { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 32px; }
+    .step figure.two { flex-direction: column; align-items: center; }
+    .step figure.two img { width: 190px; }
+  }
 </style>
 </head>
 <body>
@@ -217,6 +325,7 @@
       <a class="gh" href="https://github.com/abed232822-stack/Jamaah" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
         <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
       </a>
+      <button class="explain" id="explain" type="button" aria-haspopup="dialog" data-i18n="explain">شرح</button>
       <button class="lang" id="lang" type="button" lang="en" dir="ltr">English</button>
     </div>
   </header>
@@ -257,6 +366,87 @@
   </section>
 </main>
 
+<dialog class="guide" id="guide" aria-labelledby="guide-title">
+  <div class="guide-head">
+    <h2 id="guide-title" data-i18n="gt">كيف يعمل جماعة؟</h2>
+    <button class="guide-close" id="guide-close" type="button" aria-label="إغلاق">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+  <div class="guide-body">
+    <p class="guide-intro" data-i18n="gi"></p>
+    <section class="step">
+      <figure><img src="docs/explain/location.png" alt="" width="932" height="1928" loading="lazy"></figure>
+      <div>
+        <h3><span class="step-no">1</span><span data-i18n="s1t"></span></h3>
+        <p class="step-lead" data-i18n="s1p"></p>
+        <ol class="marks">
+          <li data-i18n="s1a"></li>
+          <li data-i18n="s1b"></li>
+        </ol>
+      </div>
+    </section>
+    <section class="step">
+      <figure><img src="docs/explain/home.png" alt="" width="932" height="1928" loading="lazy"></figure>
+      <div>
+        <h3><span class="step-no">2</span><span data-i18n="s2t"></span></h3>
+        <p class="step-lead" data-i18n="s2p"></p>
+        <ol class="marks">
+          <li data-i18n="s2a"></li>
+          <li data-i18n="s2b"></li>
+          <li data-i18n="s2c"></li>
+        </ol>
+      </div>
+    </section>
+    <section class="step">
+      <figure><img src="docs/explain/iqamah.png" alt="" width="932" height="1928" loading="lazy"></figure>
+      <div>
+        <h3><span class="step-no">3</span><span data-i18n="s3t"></span></h3>
+        <p class="step-lead" data-i18n="s3p"></p>
+        <ol class="marks">
+          <li data-i18n="s3a"></li>
+          <li data-i18n="s3b"></li>
+        </ol>
+      </div>
+    </section>
+    <section class="step">
+      <figure class="two"><img src="docs/explain/adjust.png" alt="" width="932" height="1928" loading="lazy"><img src="docs/explain/iqamah-times.png" alt="" width="932" height="1928" loading="lazy"></figure>
+      <div>
+        <h3><span class="step-no">4</span><span data-i18n="s4t"></span></h3>
+        <p class="step-lead" data-i18n="s4p"></p>
+        <ol class="marks">
+          <li data-i18n="s4a"></li>
+          <li data-i18n="s4b"></li>
+        </ol>
+      </div>
+    </section>
+    <section class="step">
+      <figure><img src="docs/explain/settings.png" alt="" width="932" height="1928" loading="lazy"></figure>
+      <div>
+        <h3><span class="step-no">5</span><span data-i18n="s5t"></span></h3>
+        <p class="step-lead" data-i18n="s5p"></p>
+        <ol class="marks">
+          <li data-i18n="s5a"></li>
+          <li data-i18n="s5b"></li>
+          <li data-i18n="s5c"></li>
+          <li data-i18n="s5d"></li>
+          <li data-i18n="s5e"></li>
+        </ol>
+      </div>
+    </section>
+    <section class="step">
+      <figure><img src="docs/explain/method.png" alt="" width="932" height="1928" loading="lazy"></figure>
+      <div>
+        <h3><span class="step-no">6</span><span data-i18n="s6t"></span></h3>
+        <p class="step-lead" data-i18n="s6p"></p>
+        <ol class="marks">
+          <li data-i18n="s6a"></li>
+        </ol>
+      </div>
+    </section>
+  </div>
+</dialog>
+
 <script>
 (function () {
   var T = {
@@ -273,6 +463,36 @@
       hint: "بعد التحميل افتح الملف واسمح بالتثبيت من هذا المصدر.",
       vpn: "ملاحظة: قد يحتاج التحميل إلى VPN داخل سوريا.",
       toggle: "English",
+      explain: "شرح",
+      gt: "كيف يعمل جماعة؟",
+      gi: "ست خطوات بسيطة تعرّفك على التطبيق. الأرقام على الصور تقابل الأرقام في القوائم.",
+      s1t: "اختر موقعك",
+      s1p: "أوقات الصلاة تُحسب بحسب مكانك، لذلك هذه أول خطوة.",
+      s1a: "اضغط «حدد موقعي» ليحدد التطبيق مكانك تلقائيًا.",
+      s1b: "أو ابحث عن مدينتك أو حيّك بالاسم، بالعربية أو بالإنكليزية.",
+      s2t: "الشاشة الرئيسية",
+      s2p: "كل ما تحتاجه لمعرفة الصلاة القادمة في نظرة واحدة.",
+      s2a: "بطاقة الصلاة القادمة: اسمها ووقت الأذان والإقامة، وحلقة تعدّ لك الدقائق المتبقية.",
+      s2b: "أوقات صلوات اليوم، وتحت كل وقت موعد الإقامة. الصلاة القادمة تظهر ملوّنة.",
+      s2c: "تنقّل بين الشاشة الرئيسية والإعدادات من هنا.",
+      s3t: "العدّ التنازلي للإقامة وتنبيه الخروج",
+      s3p: "بعد الأذان تتحول البطاقة إلى عدٍّ تنازلي حتى الإقامة.",
+      s3a: "الحلقة تعدّ الدقائق المتبقية حتى الإقامة.",
+      s3b: "شريط «اخرج إلى المسجد» يخبرك متى تغادر بيتك، بحسب الوقت الذي تحتاجه للوصول.",
+      s4t: "اضبط وقت الإقامة",
+      s4p: "تختلف الإقامة من مسجد إلى آخر، فاجعلها كما في مسجدك.",
+      s4a: "اضغط على أي صلاة في الشاشة الرئيسية، ثم غيّر الدقائق بين الأذان والإقامة بزرّي + و −.",
+      s4b: "أو عدّل كل الصلوات معًا من «أوقات الإقامة» في الإعدادات.",
+      s5t: "الإعدادات",
+      s5p: "خصّص التطبيق ليناسب مسجدك وعاداتك.",
+      s5a: "اللغة (العربية أو English) والمظهر (النظام أو فاتح أو داكن).",
+      s5b: "أوقات الإقامة لكل صلاة.",
+      s5c: "الوقت الذي تحتاجه للوصول إلى المسجد، وعليه يُحسب تنبيه الخروج.",
+      s5d: "تنبيه عند دخول وقت كل صلاة، وتذكير بالخروج إلى الجماعة قبل الإقامة.",
+      s5e: "تغيير الموقع وطريقة حساب الأوقات.",
+      s6t: "طريقة الحساب",
+      s6p: "تختلف زوايا الفجر والعشاء بين الجهات الشرعية.",
+      s6a: "اختر الطريقة المعتمدة في منطقتك، وتظهر تحت كل واحدة زاويتا الفجر والعشاء.",
       s1: ["docs/screenshots/ar-04-home-iqamah-countdown.png", "العدّ التنازلي للإقامة في شاشة جماعة"],
       s2: ["docs/screenshots/ar-08-settings.png", "شاشة الإعدادات في جماعة"]
     },
@@ -289,6 +509,36 @@
       hint: "After downloading, open the file and allow installing from this source.",
       vpn: "Note: downloading may require a VPN in Syria.",
       toggle: "العربية",
+      explain: "Explain",
+      gt: "How Jama’ah works",
+      gi: "Six quick steps to get to know the app. The numbers on the screenshots match the numbers in the lists.",
+      s1t: "Pick your location",
+      s1p: "Prayer times depend on where you are, so this comes first.",
+      s1a: "Tap “Locate me” and the app finds your place automatically.",
+      s1b: "Or search for your city or neighbourhood by name, in Arabic or English.",
+      s2t: "The home screen",
+      s2p: "Everything you need to know about the next prayer at a glance.",
+      s2a: "The next-prayer card: its name, adhan and iqamah times, and a ring counting the minutes left.",
+      s2b: "Today’s prayer times, with the iqamah time under each. The next prayer is highlighted.",
+      s2c: "Switch between Home and Settings from here.",
+      s3t: "Iqamah countdown and leave alert",
+      s3p: "After the adhan the card turns into a countdown to the iqamah.",
+      s3a: "The ring counts the minutes left until the iqamah.",
+      s3b: "The “Leave for the mosque” bar tells you when to head out, based on how long you need to get there.",
+      s4t: "Set the iqamah time",
+      s4p: "The iqamah differs from one mosque to another, so match yours.",
+      s4a: "Tap any prayer on the home screen, then change the minutes between adhan and iqamah with + and −.",
+      s4b: "Or edit every prayer at once from “Iqamah times” in Settings.",
+      s5t: "Settings",
+      s5p: "Make the app fit your mosque and your habits.",
+      s5a: "Language (Arabic or English) and appearance (System, Light or Dark).",
+      s5b: "Iqamah times for each prayer.",
+      s5c: "How long you need to reach the mosque. The leave alert is calculated from it.",
+      s5d: "An alert when each prayer time starts, and a reminder to leave for the congregation before the iqamah.",
+      s5e: "Change your location and the calculation method.",
+      s6t: "Calculation method",
+      s6p: "Fajr and Isha angles differ between religious authorities.",
+      s6a: "Choose the method used in your region. Each option shows its Fajr and Isha angles.",
       s1: ["docs/screenshots/en-03-home-before-adhan.png", "Countdown to the next prayer in Jama'ah"],
       s2: ["docs/screenshots/en-08-settings.png", "Settings screen in Jama'ah"]
     }
@@ -307,6 +557,7 @@
     b.textContent = t.toggle;
     b.lang = l === "ar" ? "en" : "ar";
     b.dir = l === "ar" ? "ltr" : "rtl";
+    document.getElementById("guide-close").setAttribute("aria-label", l === "ar" ? "إغلاق" : "Close");
     [["shot1", t.s1], ["shot2", t.s2]].forEach(function (p) {
       var img = document.getElementById(p[0]);
       img.src = p[1][0];
@@ -319,11 +570,22 @@
   try { saved = localStorage.getItem("jamaah-lang"); } catch (e) {}
   var q = new URLSearchParams(location.search).get("lang");
   var start = (q === "en" || q === "ar") ? q : (saved === "en" ? "en" : "ar");
-  if (start === "en") apply("en");
+  apply(start);
 
   document.getElementById("lang").addEventListener("click", function () {
     apply(document.documentElement.lang === "ar" ? "en" : "ar");
   });
+
+  var guide = document.getElementById("guide");
+  function lock(on) { document.documentElement.style.overflow = on ? "hidden" : ""; }
+  document.getElementById("explain").addEventListener("click", function () {
+    guide.showModal();
+    guide.querySelector(".guide-body").scrollTop = 0;
+    lock(true);
+  });
+  document.getElementById("guide-close").addEventListener("click", function () { guide.close(); });
+  guide.addEventListener("click", function (e) { if (e.target === guide) guide.close(); });
+  guide.addEventListener("close", function () { lock(false); });
 })();
 </script>
 </body>
