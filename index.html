@@ -263,31 +263,65 @@
   }
   .guide-close svg { width: 20px; height: 20px; }
 
-  .guide-body { overflow-y: auto; overscroll-behavior: contain; padding: 8px 20px 28px; }
-  .guide-body { scrollbar-width: none; }
-  .guide-body::-webkit-scrollbar { display: none; }
-  .guide-intro { color: var(--mut); margin-block: 12px 4px; }
+  .guide { height: min(90svh, 860px); }
 
-  .step { display: grid; gap: 20px; align-items: center; padding-block: 28px; border-block-end: 1px solid var(--line); }
-  .step:last-child { border-block-end: 0; padding-block-end: 0; }
-  .step h3 { font-family: "Reem Kufi", "Readex Pro", sans-serif; font-weight: 700; font-size: 1.3rem; line-height: 1.4; display: flex; align-items: center; gap: 10px; }
-  .step-no {
+  .tabs-bar { border-block-end: 1px solid var(--line); }
+  .tabs {
+    display: flex;
+    gap: 8px;
+    padding: 12px 20px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    scroll-snap-type: x proximity;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab {
     flex: none;
-    display: grid;
-    place-items: center;
-    width: 34px;
-    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 18px;
+    border: 0;
+    border-radius: 99px;
+    background: var(--tile);
+    color: var(--ink);
+    font: inherit;
+    font-size: .95rem;
+    white-space: nowrap;
+    cursor: pointer;
+    scroll-snap-align: center;
+    transition: background-color .15s ease, color .15s ease, transform .15s ease;
+  }
+  .tab:hover { filter: brightness(1.06); }
+  .tab:active { transform: scale(.97); }
+  .tab[aria-selected="true"] { background: var(--acc); color: var(--acc-ink); }
+  .tab-new {
+    font-size: .72rem;
+    line-height: 1;
+    padding: 4px 8px;
     border-radius: 99px;
     background: var(--acc);
     color: var(--acc-ink);
-    font-family: "Readex Pro", sans-serif;
-    font-size: 1rem;
   }
+  .tab[aria-selected="true"] .tab-new { background: var(--acc-ink); color: var(--acc); }
+
+  .guide-body { overflow-y: auto; overscroll-behavior: contain; padding: 8px 20px 28px; flex: 1; scrollbar-width: none; }
+  .guide-body::-webkit-scrollbar { display: none; }
+  .guide-intro { color: var(--mut); margin-block: 12px 0; }
+
+  .step { display: grid; gap: 20px; align-items: center; padding-block: 24px 0; }
+  .step[hidden] { display: none; }
+  @media (prefers-reduced-motion: no-preference) {
+    .step { animation: step-in .25s cubic-bezier(.2, .7, .2, 1); }
+    @keyframes step-in { from { opacity: 0; transform: translateY(8px); } }
+  }
+  .step h3 { font-family: "Reem Kufi", "Readex Pro", sans-serif; font-weight: 700; font-size: 1.3rem; line-height: 1.4; }
   .step-lead { margin-block-start: 6px; color: var(--mut); }
-  .marks { list-style: none; padding: 0; margin-block-start: 14px; display: grid; gap: 12px; counter-reset: mark; }
-  .marks li { display: flex; gap: 12px; align-items: flex-start; counter-increment: mark; }
-  .marks li::before {
-    content: counter(mark);
+  .marks { list-style: none; padding: 0; margin-block-start: 14px; display: grid; gap: 12px; }
+  .marks li { display: flex; gap: 12px; align-items: flex-start; }
+  .marks .no {
     flex: none;
     display: grid;
     place-items: center;
@@ -305,8 +339,10 @@
   .step figure { display: flex; justify-content: center; gap: 12px; }
   .step img { width: min(46vw, 210px); height: auto; display: block; filter: drop-shadow(0 14px 18px var(--shadow)); }
   .step figure.two img { width: min(40vw, 190px); }
+  .step figure.wide img { width: min(86vw, 300px); }
 
   @media (min-width: 640px) {
+    .tabs { padding-inline: 32px; }
     .guide-body { padding-inline: 32px; }
     .step { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 32px; }
     .step figure.two { flex-direction: column; align-items: center; }
@@ -343,12 +379,12 @@
       </ul>
 
       <div class="cta">
-        <a class="btn" href="https://github.com/abed232822-stack/Jamaah/releases/download/v1.0.0/Jamaah-1.0.0-arm64-v8a.apk" download>
+        <a class="btn" href="https://github.com/abed232822-stack/Jamaah/releases/download/v2.0.0/Jamaah-v2.0.0-arm64-v8a-release.apk" download>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 20h14"/></svg>
           <span data-i18n="btn">حمّل التطبيق</span>
         </a>
         <p class="meta" data-i18n="vpn">ملاحظة: قد يحتاج التحميل إلى VPN داخل سوريا.</p>
-        <p class="hint" data-i18n="meta">لأجهزة أندرويد فقط، الإصدار 1.0.0، حجمه 24 ميغابايت</p>
+        <p class="hint" data-i18n="meta">لأجهزة أندرويد فقط، الإصدار 2.0.0، حجمه 27 ميغابايت</p>
         <p class="hint" data-i18n="hint">بعد التحميل افتح الملف واسمح بالتثبيت من هذا المصدر.</p>
       </div>
     </div>
@@ -373,77 +409,12 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
     </button>
   </div>
-  <div class="guide-body">
+  <div class="tabs-bar">
+    <div class="tabs" id="tabs" role="tablist" aria-orientation="horizontal"></div>
+  </div>
+  <div class="guide-body" id="guide-body">
     <p class="guide-intro" data-i18n="gi"></p>
-    <section class="step">
-      <figure><img src="docs/explain/location.png" alt="" width="932" height="1928" loading="lazy"></figure>
-      <div>
-        <h3><span class="step-no">1</span><span data-i18n="s1t"></span></h3>
-        <p class="step-lead" data-i18n="s1p"></p>
-        <ol class="marks">
-          <li data-i18n="s1a"></li>
-          <li data-i18n="s1b"></li>
-        </ol>
-      </div>
-    </section>
-    <section class="step">
-      <figure><img src="docs/explain/home.png" alt="" width="932" height="1928" loading="lazy"></figure>
-      <div>
-        <h3><span class="step-no">2</span><span data-i18n="s2t"></span></h3>
-        <p class="step-lead" data-i18n="s2p"></p>
-        <ol class="marks">
-          <li data-i18n="s2a"></li>
-          <li data-i18n="s2b"></li>
-          <li data-i18n="s2c"></li>
-        </ol>
-      </div>
-    </section>
-    <section class="step">
-      <figure><img src="docs/explain/iqamah.png" alt="" width="932" height="1928" loading="lazy"></figure>
-      <div>
-        <h3><span class="step-no">3</span><span data-i18n="s3t"></span></h3>
-        <p class="step-lead" data-i18n="s3p"></p>
-        <ol class="marks">
-          <li data-i18n="s3a"></li>
-          <li data-i18n="s3b"></li>
-        </ol>
-      </div>
-    </section>
-    <section class="step">
-      <figure class="two"><img src="docs/explain/adjust.png" alt="" width="932" height="1928" loading="lazy"><img src="docs/explain/iqamah-times.png" alt="" width="932" height="1928" loading="lazy"></figure>
-      <div>
-        <h3><span class="step-no">4</span><span data-i18n="s4t"></span></h3>
-        <p class="step-lead" data-i18n="s4p"></p>
-        <ol class="marks">
-          <li data-i18n="s4a"></li>
-          <li data-i18n="s4b"></li>
-        </ol>
-      </div>
-    </section>
-    <section class="step">
-      <figure><img src="docs/explain/settings.png" alt="" width="932" height="1928" loading="lazy"></figure>
-      <div>
-        <h3><span class="step-no">5</span><span data-i18n="s5t"></span></h3>
-        <p class="step-lead" data-i18n="s5p"></p>
-        <ol class="marks">
-          <li data-i18n="s5a"></li>
-          <li data-i18n="s5b"></li>
-          <li data-i18n="s5c"></li>
-          <li data-i18n="s5d"></li>
-          <li data-i18n="s5e"></li>
-        </ol>
-      </div>
-    </section>
-    <section class="step">
-      <figure><img src="docs/explain/method.png" alt="" width="932" height="1928" loading="lazy"></figure>
-      <div>
-        <h3><span class="step-no">6</span><span data-i18n="s6t"></span></h3>
-        <p class="step-lead" data-i18n="s6p"></p>
-        <ol class="marks">
-          <li data-i18n="s6a"></li>
-        </ol>
-      </div>
-    </section>
+    <div id="panels"></div>
   </div>
 </dialog>
 
@@ -459,40 +430,65 @@
       f3: "المواقيت محفوظة على جهازك",
       f4: "بلا أي نوع من الإعلانات",
       btn: "حمّل التطبيق",
-      meta: "لأجهزة أندرويد فقط، الإصدار 1.0.0، حجمه 24 ميغابايت",
+      meta: "لأجهزة أندرويد فقط، الإصدار 2.0.0، حجمه 27 ميغابايت",
       hint: "بعد التحميل افتح الملف واسمح بالتثبيت من هذا المصدر.",
       vpn: "ملاحظة: قد يحتاج التحميل إلى VPN داخل سوريا.",
       toggle: "English",
       explain: "شرح",
       gt: "كيف يعمل جماعة؟",
-      gi: "ست خطوات بسيطة تعرّفك على التطبيق. الأرقام على الصور تقابل الأرقام في القوائم.",
-      s1t: "اختر موقعك",
-      s1p: "أوقات الصلاة تُحسب بحسب مكانك، لذلك هذه أول خطوة.",
-      s1a: "اضغط «حدد موقعي» ليحدد التطبيق مكانك تلقائيًا.",
-      s1b: "أو ابحث عن مدينتك أو حيّك بالاسم، بالعربية أو بالإنكليزية.",
-      s2t: "الشاشة الرئيسية",
-      s2p: "كل ما تحتاجه لمعرفة الصلاة القادمة في نظرة واحدة.",
-      s2a: "بطاقة الصلاة القادمة: اسمها ووقت الأذان والإقامة، وحلقة تعدّ لك الدقائق المتبقية.",
-      s2b: "أوقات صلوات اليوم، وتحت كل وقت موعد الإقامة. الصلاة القادمة تظهر ملوّنة.",
-      s2c: "تنقّل بين الشاشة الرئيسية والإعدادات من هنا.",
-      s3t: "العدّ التنازلي للإقامة وتنبيه الخروج",
-      s3p: "بعد الأذان تتحول البطاقة إلى عدٍّ تنازلي حتى الإقامة.",
-      s3a: "الحلقة تعدّ الدقائق المتبقية حتى الإقامة.",
-      s3b: "شريط «اخرج إلى المسجد» يخبرك متى تغادر بيتك، بحسب الوقت الذي تحتاجه للوصول.",
-      s4t: "اضبط وقت الإقامة",
-      s4p: "تختلف الإقامة من مسجد إلى آخر، فاجعلها كما في مسجدك.",
-      s4a: "اضغط على أي صلاة في الشاشة الرئيسية، ثم غيّر الدقائق بين الأذان والإقامة بزرّي + و −.",
-      s4b: "أو عدّل كل الصلوات معًا من «أوقات الإقامة» في الإعدادات.",
-      s5t: "الإعدادات",
-      s5p: "خصّص التطبيق ليناسب مسجدك وعاداتك.",
-      s5a: "اللغة (العربية أو English) والمظهر (النظام أو فاتح أو داكن).",
-      s5b: "أوقات الإقامة لكل صلاة.",
-      s5c: "الوقت الذي تحتاجه للوصول إلى المسجد، وعليه يُحسب تنبيه الخروج.",
-      s5d: "تنبيه عند دخول وقت كل صلاة، وتذكير بالخروج إلى الجماعة قبل الإقامة.",
-      s5e: "تغيير الموقع وطريقة حساب الأوقات.",
-      s6t: "طريقة الحساب",
-      s6p: "تختلف زوايا الفجر والعشاء بين الجهات الشرعية.",
-      s6a: "اختر الطريقة المعتمدة في منطقتك، وتظهر تحت كل واحدة زاويتا الفجر والعشاء.",
+      gi: "اختر ميزة من الشريط لتعرف كيف تعمل. الأرقام على الصور تقابل الأرقام في القوائم.",
+      newTag: "جديد",
+      locn: "الموقع", loct: "اختر موقعك",
+      locp: "أوقات الصلاة تُحسب بحسب مكانك، لذلك هذه أول خطوة.",
+      loc1: "موقعك الحالي: المدينة التي تُحسب بها الأوقات.",
+      loc2: "اضغط «حدد موقعي» ليحدد التطبيق مكانك تلقائيًا.",
+      loc3: "أو ابحث عن مدينتك أو حيّك بالاسم، بالعربية أو بالإنكليزية.",
+      homn: "الرئيسية", homt: "الشاشة الرئيسية",
+      homp: "كل ما تحتاجه لمعرفة الصلاة القادمة في نظرة واحدة.",
+      hom1: "بطاقة الصلاة القادمة: اسمها ووقت الأذان والإقامة، وحلقة تعدّ لك الدقائق المتبقية.",
+      hom2: "أوقات صلوات اليوم، وتحت كل وقت موعد الإقامة. الصلاة القادمة محاطة بإطار.",
+      hom3: "تنقّل بين الرئيسية والدروس والإعدادات من هنا.",
+      iqn: "العدّ التنازلي", iqt: "العدّ التنازلي للإقامة وتنبيه الخروج",
+      iqp: "بعد الأذان تتحول البطاقة إلى عدٍّ تنازلي حتى الإقامة.",
+      iq1: "وقت الأذان ووقت الإقامة للصلاة الحالية.",
+      iq2: "الحلقة تعدّ الدقائق المتبقية حتى الإقامة.",
+      iq3: "شريط الخروج يخبرك متى تغادر بيتك بحسب الوقت الذي تحتاجه للوصول، ويصير «اخرج الآن» حين يحين وقتك.",
+      adjn: "ضبط الإقامة", adjt: "اضبط وقت الإقامة",
+      adjp: "تختلف الإقامة من مسجد إلى آخر، فاجعلها كما في مسجدك.",
+      adj1: "اضغط على أي صلاة في الشاشة الرئيسية، ثم غيّر الدقائق بين الأذان والإقامة بزرّي + و −.",
+      adj2: "يظهر لك وقت الأذان ووقت الإقامة الجديد فورًا.",
+      adj3: "اضغط «تم» للحفظ.",
+      adj4: "أو عدّل كل الصلوات معًا من «أوقات الإقامة» في الإعدادات.",
+      adj5: "زرّا + و − لكل صلاة.",
+      adj6: "وقت الأذان ووقت الإقامة الناتج عنه.",
+      lesn: "الدروس", lest: "الدروس الأسبوعية",
+      lesp: "سجّل دروس مسجدك ليذكّرك بها التطبيق قبل موعدها.",
+      les1: "اضغط «إضافة» لإضافة درس جديد.",
+      les2: "اضغط على أي يوم لتعرض دروسه.",
+      les3: "دروس اليوم المحدد، ويُعلَّم الدرس القادم.",
+      les4: "عنوان الدرس والشيخ والمسجد، مع اقتراح مساجد أضفتها من قبل.",
+      les5: "الأيام التي يتكرر فيها الدرس كل أسبوع.",
+      les6: "وقت محدد، أو بعد صلاة معيّنة.",
+      les7: "تذكير قبل الدرس بالمدة التي تختارها.",
+      widn: "الودجت", widt: "ودجت الشاشة الرئيسية",
+      widp: "لإضافته اضغط مطولًا على الشاشة الرئيسية، ثم «الودجات» واختر جماعة. وبالضغط عليه يفتح التطبيق.",
+      wid1: "التاريخ الهجري والميلادي واسم مدينتك.",
+      wid2: "بطاقة الصلاة القادمة: الوقت المتبقي للأذان على شريط تقدّم، ووقتا الأذان والإقامة.",
+      wid3: "«مشي»: الوقت الذي تحتاجه للوصول إلى المسجد.",
+      wid4: "شارة «اخرج» تخبرك بالساعة التي تغادر فيها بيتك.",
+      wid5: "مسار اليوم: أوقات الصلوات كلها، والصلاة الحالية معلَّمة.",
+      setn: "الإعدادات", sett: "الإعدادات",
+      setp: "خصّص التطبيق ليناسب مسجدك وعاداتك.",
+      set1: "اللغة (العربية أو English) والمظهر (النظام أو فاتح أو داكن) والأرقام (عادية أو هندية).",
+      set2: "أوقات الإقامة لكل صلاة.",
+      set3: "الوقت الذي تحتاجه للوصول إلى المسجد، وعليه يُحسب تنبيه الخروج.",
+      set4: "تنبيه عند دخول وقت كل صلاة، وتذكير بالخروج إلى الجماعة قبل الإقامة.",
+      set5: "تغيير الموقع وطريقة حساب الأوقات.",
+      set6: "عن المطوّر: من صنع جماعة وكيف تتواصل معه.",
+      metn: "طريقة الحساب", mett: "طريقة الحساب",
+      metp: "تختلف زوايا الفجر والعشاء بين الجهات الشرعية.",
+      met1: "اختر الطريقة المعتمدة في منطقتك، وتظهر تحت كل واحدة زاويتا الفجر والعشاء.",
+      met2: "الطريقة المختارة حاليًا.",
       s1: ["docs/screenshots/ar-04-home-iqamah-countdown.png", "العدّ التنازلي للإقامة في شاشة جماعة"],
       s2: ["docs/screenshots/ar-08-settings.png", "شاشة الإعدادات في جماعة"]
     },
@@ -505,40 +501,65 @@
       f3: "Prayer times saved on your device",
       f4: "No ads of any kind",
       btn: "Download the app",
-      meta: "Android only, version 1.0.0, 24 MB",
+      meta: "Android only, version 2.0.0, 27 MB",
       hint: "After downloading, open the file and allow installing from this source.",
       vpn: "Note: downloading may require a VPN in Syria.",
       toggle: "العربية",
       explain: "Explain",
       gt: "How Jama’ah works",
-      gi: "Six quick steps to get to know the app. The numbers on the screenshots match the numbers in the lists.",
-      s1t: "Pick your location",
-      s1p: "Prayer times depend on where you are, so this comes first.",
-      s1a: "Tap “Locate me” and the app finds your place automatically.",
-      s1b: "Or search for your city or neighbourhood by name, in Arabic or English.",
-      s2t: "The home screen",
-      s2p: "Everything you need to know about the next prayer at a glance.",
-      s2a: "The next-prayer card: its name, adhan and iqamah times, and a ring counting the minutes left.",
-      s2b: "Today’s prayer times, with the iqamah time under each. The next prayer is highlighted.",
-      s2c: "Switch between Home and Settings from here.",
-      s3t: "Iqamah countdown and leave alert",
-      s3p: "After the adhan the card turns into a countdown to the iqamah.",
-      s3a: "The ring counts the minutes left until the iqamah.",
-      s3b: "The “Leave for the mosque” bar tells you when to head out, based on how long you need to get there.",
-      s4t: "Set the iqamah time",
-      s4p: "The iqamah differs from one mosque to another, so match yours.",
-      s4a: "Tap any prayer on the home screen, then change the minutes between adhan and iqamah with + and −.",
-      s4b: "Or edit every prayer at once from “Iqamah times” in Settings.",
-      s5t: "Settings",
-      s5p: "Make the app fit your mosque and your habits.",
-      s5a: "Language (Arabic or English) and appearance (System, Light or Dark).",
-      s5b: "Iqamah times for each prayer.",
-      s5c: "How long you need to reach the mosque. The leave alert is calculated from it.",
-      s5d: "An alert when each prayer time starts, and a reminder to leave for the congregation before the iqamah.",
-      s5e: "Change your location and the calculation method.",
-      s6t: "Calculation method",
-      s6p: "Fajr and Isha angles differ between religious authorities.",
-      s6a: "Choose the method used in your region. Each option shows its Fajr and Isha angles.",
+      gi: "Pick a feature from the bar to see how it works. The numbers on the screenshots match the numbers in the lists.",
+      newTag: "New",
+      locn: "Location", loct: "Pick your location",
+      locp: "Prayer times depend on where you are, so this comes first.",
+      loc1: "Your current location: the city the times are calculated for.",
+      loc2: "Tap “Locate me” and the app finds your place automatically.",
+      loc3: "Or search for your city or neighbourhood by name, in Arabic or English.",
+      homn: "Home", homt: "The home screen",
+      homp: "Everything you need to know about the next prayer at a glance.",
+      hom1: "The next-prayer card: its name, adhan and iqamah times, and a ring counting the minutes left.",
+      hom2: "Today’s prayer times, with the iqamah time under each. The next prayer has an outline.",
+      hom3: "Switch between Home, Lessons and Settings from here.",
+      iqn: "Countdown", iqt: "Iqamah countdown and leave alert",
+      iqp: "After the adhan the card turns into a countdown to the iqamah.",
+      iq1: "The adhan and iqamah times of the current prayer.",
+      iq2: "The ring counts the minutes left until the iqamah.",
+      iq3: "The leave bar tells you when to head out, based on how long you need to get there, and turns to “Leave now” when it’s time.",
+      adjn: "Iqamah time", adjt: "Set the iqamah time",
+      adjp: "The iqamah differs from one mosque to another, so match yours.",
+      adj1: "Tap any prayer on the home screen, then change the minutes between adhan and iqamah with + and −.",
+      adj2: "The adhan time and the new iqamah time update right away.",
+      adj3: "Tap “Done” to save.",
+      adj4: "Or edit every prayer at once from “Iqamah times” in Settings.",
+      adj5: "The + and − buttons for each prayer.",
+      adj6: "The adhan time and the iqamah time that results.",
+      lesn: "Lessons", lest: "Weekly lessons",
+      lesp: "Save your mosque lessons and the app reminds you before they start.",
+      les1: "Tap “Add” to add a new lesson.",
+      les2: "Tap any day to see its lessons.",
+      les3: "The lessons of the selected day, with the next lesson marked.",
+      les4: "The lesson title, the sheikh and the mosque, with suggestions from mosques you added before.",
+      les5: "The days the lesson repeats on every week.",
+      les6: "A fixed time, or after a chosen prayer.",
+      les7: "A reminder before the lesson, as early as you choose.",
+      widn: "Widget", widt: "Home screen widget",
+      widp: "To add it, long-press your home screen, open “Widgets” and pick Jama’ah. Tapping it opens the app.",
+      wid1: "The Hijri and Gregorian dates and your city.",
+      wid2: "The next-prayer card: time left to the adhan on a progress bar, plus the adhan and iqamah times.",
+      wid3: "“Walk”: how long you need to reach the mosque.",
+      wid4: "The leave chip tells you what time to head out.",
+      wid5: "The day path: every prayer time, with the current prayer marked.",
+      setn: "Settings", sett: "Settings",
+      setp: "Make the app fit your mosque and your habits.",
+      set1: "Language (Arabic or English), appearance (System, Light or Dark) and numerals (Western or Hindi).",
+      set2: "Iqamah times for each prayer.",
+      set3: "How long you need to reach the mosque. The leave alert is calculated from it.",
+      set4: "An alert when each prayer time starts, and a reminder to leave for the congregation before the iqamah.",
+      set5: "Change your location and the calculation method.",
+      set6: "About the developer: who made Jama’ah and how to reach them.",
+      metn: "Calculation method", mett: "Calculation method",
+      metp: "Fajr and Isha angles differ between religious authorities.",
+      met1: "Choose the method used in your region. Each option shows its Fajr and Isha angles.",
+      met2: "The method currently selected.",
       s1: ["docs/screenshots/en-03-home-before-adhan.png", "Countdown to the next prayer in Jama'ah"],
       s2: ["docs/screenshots/en-08-settings.png", "Settings screen in Jama'ah"]
     }
@@ -563,8 +584,105 @@
       img.src = p[1][0];
       img.alt = p[1][1];
     });
+    buildGuide(l);
     try { localStorage.setItem("jamaah-lang", l); } catch (e) {}
   }
+
+  var FEATURES = [
+    { k: "loc", imgs: ["location"], n: 3 },
+    { k: "hom", imgs: ["home"], n: 3 },
+    { k: "iq", imgs: ["iqamah"], n: 3 },
+    { k: "adj", imgs: ["adjust", "iqamah-times"], n: 6 },
+    { k: "les", imgs: ["lessons", "lesson-form"], n: 7, isNew: true },
+    { k: "wid", imgs: ["widget"], n: 5, w: 900, h: 819, cls: "wide" },
+    { k: "set", imgs: ["settings", "settings-more"], n: 6 },
+    { k: "met", imgs: ["method"], n: 2 }
+  ];
+  var cur = 0;
+  var tabsEl = document.getElementById("tabs");
+  var panelsEl = document.getElementById("panels");
+
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+
+  function buildGuide(l) {
+    var t = T[l];
+    tabsEl.textContent = "";
+    panelsEl.textContent = "";
+    tabsEl.setAttribute("aria-label", t.gt);
+    FEATURES.forEach(function (f, i) {
+      var tab = el("button", "tab", t[f.k + "n"]);
+      tab.type = "button";
+      tab.id = "tab-" + f.k;
+      tab.setAttribute("role", "tab");
+      tab.setAttribute("aria-controls", "panel-" + f.k);
+      if (f.isNew) tab.appendChild(el("span", "tab-new", t.newTag));
+      tab.addEventListener("click", function () { select(i, false); });
+      tabsEl.appendChild(tab);
+
+      var panel = el("section", "step");
+      panel.id = "panel-" + f.k;
+      panel.setAttribute("role", "tabpanel");
+      panel.setAttribute("aria-labelledby", tab.id);
+      var fig = el("figure", f.cls || (f.imgs.length > 1 ? "two" : ""));
+      f.imgs.forEach(function (name) {
+        var img = new Image();
+        img.src = "docs/explain/" + name + ".webp";
+        img.alt = "";
+        img.width = f.w || 490;
+        img.height = f.h || 984;
+        img.loading = "lazy";
+        fig.appendChild(img);
+      });
+      var body = el("div");
+      body.appendChild(el("h3", "", t[f.k + "t"]));
+      body.appendChild(el("p", "step-lead", t[f.k + "p"]));
+      var ol = el("ol", "marks");
+      for (var n = 1; n <= f.n; n++) {
+        var li = el("li");
+        li.appendChild(el("span", "no", String(n)));
+        li.appendChild(el("span", "", t[f.k + n]));
+        ol.appendChild(li);
+      }
+      body.appendChild(ol);
+      panel.appendChild(fig);
+      panel.appendChild(body);
+      panelsEl.appendChild(panel);
+    });
+    select(cur, false, true);
+  }
+
+  function select(i, focus, quiet) {
+    cur = i;
+    var tabs = tabsEl.children, panels = panelsEl.children;
+    for (var j = 0; j < tabs.length; j++) {
+      var on = j === i;
+      tabs[j].setAttribute("aria-selected", on ? "true" : "false");
+      tabs[j].tabIndex = on ? 0 : -1;
+      panels[j].hidden = !on;
+    }
+    if (focus) tabs[i].focus();
+    if (!quiet) {
+      document.getElementById("guide-body").scrollTop = 0;
+      tabs[i].scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
+    }
+  }
+
+  tabsEl.addEventListener("keydown", function (e) {
+    var rtl = document.documentElement.dir === "rtl";
+    var last = FEATURES.length - 1, i = cur;
+    if (e.key === "ArrowRight") i = rtl ? cur - 1 : cur + 1;
+    else if (e.key === "ArrowLeft") i = rtl ? cur + 1 : cur - 1;
+    else if (e.key === "Home") i = 0;
+    else if (e.key === "End") i = last;
+    else return;
+    e.preventDefault();
+    select(Math.max(0, Math.min(last, i)), true);
+  });
 
   var saved = null;
   try { saved = localStorage.getItem("jamaah-lang"); } catch (e) {}
@@ -580,8 +698,9 @@
   function lock(on) { document.documentElement.style.overflow = on ? "hidden" : ""; }
   document.getElementById("explain").addEventListener("click", function () {
     guide.showModal();
-    guide.querySelector(".guide-body").scrollTop = 0;
+    document.getElementById("guide-body").scrollTop = 0;
     lock(true);
+    tabsEl.children[cur].scrollIntoView({ inline: "center", block: "nearest" });
   });
   document.getElementById("guide-close").addEventListener("click", function () { guide.close(); });
   guide.addEventListener("click", function (e) { if (e.target === guide) guide.close(); });
